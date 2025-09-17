@@ -1,0 +1,108 @@
+# MULTI-STIG RESCAN CONSOLE (AUTO)
+
+**Developed by:** C.Lu  
+**Role:** Security Automation Developer & Scripting Enthusiast  
+**Tool Type:** Stylized PowerShell Utility for System Hardening & STIG Compliance
+
+---
+
+## Purpose of the Tool
+
+The Multi-STIG Rescan Console is a custom-built PowerShell utility designed to automate the evaluation of Windows systems against STIG benchmarks. Whether targeting specific vulnerabilities or scanning across multiple profiles, this tool delivers fast results with a visually engaging interface.
+
+---
+
+## Project Summary
+
+- Designed for cybersecurity professionals and system administrators  
+- Automates compliance checks against multiple STIGs (Security Technical Implementation Guides)  
+- Features rainbow-themed banner branding, interactive input prompts, and real-time progress updates  
+- Fully developed using native PowerShell—no external dependencies
+
+---
+
+## Key Capabilities
+
+| Feature                   | Description                                                                     |
+|--------------------------|----------------------------------------------------------------------------------|
+| Rainbow Banner Interface | Color-themed startup splash with “Developed by C.Lu” for visual flair           |
+| Flexible Target Selection| Choose systems manually or load from a file                                     |
+| STIG Profile Picker      | Select specific benchmarks to scan from a menu                                  |
+| Vulnerability Search Tool| Filter by Group ID or keyword before scanning                                   |
+| Progress Bars            | Real-time feedback during evaluations and scans                                 |
+| Error Handling & Prompts | Guided input flow with retry logic and validations                              |
+| Launcher Script Support  | Opens in dedicated PowerShell window for cleaner user experience                |
+
+---
+
+## Screenshots & Visuals
+
+> All sensitive information has been redacted for public sharing.
+
+**1. Startup Banner**  
+![Startup Banner](screenshots/1-startup-banner.png)
+
+**2. STIG Selection Menu**  
+![STIG Selection](screenshots/2-stig-selection.png)
+
+**3. Vulnerability Search Results**  
+![Vuln Search](screenshots/3-vuln-search.png)
+
+**4. Scan Progress Tracker**  
+![Scan Progress](screenshots/4-scan-progress.png)
+
+**5. Completion Output Summary**  
+![Completion Output](screenshots/5-completion-output.png)
+
+---
+
+## Highlighted Code Snippets
+
+### Rainbow Banner Function
+
+```powershell
+function Write-RainbowCenteredLine ($text) {
+    $paddedText = $text.PadLeft(($text.Length + $totalWidth) / 2).PadRight($totalWidth)
+    for ($i = 0; $i -lt $paddedText.Length; $i++) {
+        $char = $paddedText[$i]
+        $color = $rainbowColors[$i % $rainbowColors.Count]
+        Write-Host -NoNewline $char -ForegroundColor $color
+    }
+    Write-Host ""
+}
+
+### Group ID Validation Logic
+
+```powershell
+function Validate-GroupIDs {
+    param ([string[]]$IDs)
+    $ValidPattern = '^V-\d{5,6}$'
+    $Validated = @()
+
+    foreach ($ID in $IDs) {
+        if ($ID -match $ValidPattern) {
+            $Validated += $ID
+        } else {
+            Write-Host "Invalid Group ID skipped: $ID" -ForegroundColor Red
+        }
+    }
+
+    return $Validated
+}
+## About the Developer
+
+**C.Lu**  
+Developer and scripting enthusiast focused on automation, clarity, and clean code. Passionate about cybersecurity tooling and building expressive PowerShell utilities that offer both power and polish.
+
+## Skills Used
+
+- PowerShell scripting  
+- Terminal UI design  
+- Input validation logic  
+- File system operations  
+- User experience flow  
+- STIG benchmarking frameworks
+
+> This repository contains redacted content to protect environment-specific details. Full implementation available upon request for cleared roles.
+
+
